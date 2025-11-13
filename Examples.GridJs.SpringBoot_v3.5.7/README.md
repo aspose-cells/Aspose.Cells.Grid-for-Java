@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This article walks you through creating a **Spring Boot 2.7.18** web application that serves an Aspose.Cells GridJs backend and a lightweight HTML/JavaScript front‑end. The demo demonstrates how to:
+This article walks you through creating a **Spring Boot 3.5.7** web application that serves an Aspose.Cells GridJs backend and a lightweight HTML/JavaScript front‑end. The demo demonstrates how to:
 
 1. **Generate a Spring Boot project** with the required dependencies.  
 2. **Configure GridJs server options** (`GridJsOptions`).  
@@ -83,12 +83,6 @@ Edit `pom.xml` and add the Aspose.Cells GridJs and Gson libraries:
 </project>
 ```
 
-Edit `pom.xml` update the version of spring boot from 3.5.7 to 2.7.18,which use javax servlet
-
-```xml
-<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.7.18</version> 
-```
 
 Run `mvn clean install` to download the new libraries.
 
@@ -162,7 +156,7 @@ Extend `GridJsControllerBase` to expose the required endpoints.
 // src/main/java/com/example/gridjsdemo/controller/GridJsController.java
 package com.example.gridjsdemo.controller;
 
-import com.aspose.gridjs.GridJsControllerBase;
+import com.aspose.gridjs.GridJsJakartaControllerBase;
 import com.aspose.gridjs.GridJsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -170,14 +164,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * REST controller exposing GridJs operations.
  */
 @RestController
 @RequestMapping("/GridJs")
-public class GridJsController extends GridJsControllerBase {
+public class GridJsController extends GridJsJakartaControllerBase {
 
     @Autowired
     public GridJsController(GridJsService gridJsService) {

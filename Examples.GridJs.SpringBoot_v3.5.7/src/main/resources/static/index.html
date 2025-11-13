@@ -1,0 +1,37 @@
+<!-- src/main/resources/static/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GridJs Demo – Load Spreadsheet</title>
+    <!-- jQuery and jQuery‑UI -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet"
+          href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <!-- JSZip (required for export) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <!-- GridJs Spreadsheet UI -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/gridjs-spreadsheet/xspreadsheet.css"/>
+    <script src="https://unpkg.com/gridjs-spreadsheet/xspreadsheet.js"></script> 
+    <!-- Demo specific script -->
+    <script src="./gridjs-demo.js"></script>
+    
+    <style>
+        body {font-family: Arial, sans-serif; margin: 20px;}
+        #gridjs-demo-uid {width: 100%; height: 800px;}
+    </style>
+</head>
+<body>
+<h1>GridJs Spreadsheet Demo</h1>
+<!-- Container for the GridJs UI -->
+<div id="gridjs-demo-uid"></div>
+<!-- Simple UI to pick a file from the server -->
+<div style="margin-top:20px;">
+    <label for="filename">Spreadsheet file (in server folder): </label>
+    <input type="text" id="filename" value="Sample.xlsx"/>
+    <button id="loadBtn">Load Spreadsheet</button>
+</div>
+</body>
+</html>
