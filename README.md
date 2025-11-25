@@ -9,13 +9,15 @@ Aspose.Cells.Grid for Java is powered by Aspose.Cells APIs and provides GUI-base
 
 Directory | Description
 --------- | -----------
-[Examples.GridJs](Examples.GridJs) | A Java example demonstrating how to build an online spreadsheet editor using Aspose.GridJs.
+[Examples.GridJs.Simple](Examples.GridJs.Simple) | A Java example demonstrating how to build an online spreadsheet editor using Aspose.GridJs with simple and tiny code.
+[Examples.GridJs.SpringBoot_v3.5.7](Examples.GridJs.SpringBoot_v3.5.7) | A Java example demonstrating how to build an online spreadsheet editor using Aspose.GridJs using spring boot v3.5.
+[Examples.GridJs](Examples.GridJs) | A Java example demonstrating how to build an online spreadsheet editor using Aspose.GridJs with  more features.
 [Examples.GridJs.Collabrative](Examples.GridJs.Collabrative) | A Java example demonstrating how to build an online collaborative spreadsheet editor using Aspose.GridJs.
 [Examples.GridWeb](Examples.GridWeb) | A collection of Java examples that help you learn and explore Aspose.GridWeb features.
 
 
 <p align="center">
-  <a title="Download ZIP" href="https://github.com/aspose-cells/Aspose.Cells-for-Java/archive/master.zip">
+  <a title="Download ZIP" href="https://github.com/aspose-cells/Aspose.Cells.Grid-for-Java/archive/master.zip">
     <img src="https://raw.githubusercontent.com/AsposeExamples/java-examples-dashboard/master/images/downloadZip-Button-Large.png" alt="Download Aspose.Cells for Java Examples, Plugins and Showcases" />
   </a>
 </p>
