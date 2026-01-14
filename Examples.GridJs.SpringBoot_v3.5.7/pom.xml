@@ -45,14 +45,14 @@
     <dependency>
         <groupId>com.aspose</groupId>
         <artifactId>aspose-cells</artifactId>
-        <version>25.12</version>
+        <version>26.1</version>
     </dependency>  
     <!-- Aspose.Cells GridJs extension -->
       <dependency>
         <groupId>com.aspose</groupId>
         <artifactId>aspose-cells</artifactId>
         <classifier>gridjs</classifier>
-        <version>25.12</version>
+        <version>26.1</version>
     </dependency> 
     <!-- Gson for JSON handling -->
     <dependency>
