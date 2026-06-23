@@ -29,7 +29,7 @@ html, body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	overflow: true;
+	overflow: hidden;
 }
 
 .container {
@@ -162,8 +162,8 @@ html, body {
             const imageuploadurl1 = "/GridJs2/AddImage";
             const imageuploadurl2 = "/GridJs2/AddImageByURL";
             const imagecopyurl = "/GridJs2/CopyImage";        // x.spreadsheet.locale('zh-cn');
- 
-            xs = x_spreadsheet('#gridjs-demo-uid', option).loadData(sheets).change((cdata) => {
+			const activeSheetName = jsondata.actname;
+            xs = x_spreadsheet('#gridjs-demo-uid', option).loadData(sheets,activeSheetName).change((cdata) => {
                 console.log(cdata);
                 console.log(xs.validate());
             }
@@ -215,16 +215,16 @@ html, body {
  
             xs.setOpenFileUrl("/gridjsdemo/list");
 
-            let activeSheetName = jsondata.actname;
-
-            if (xs.bottombar.dataNames.indexOf(activeSheetName) >= 0) {
-                xs.setActiveSheetByName(activeSheetName).setActiveCell(jsondata.actrow, jsondata.actcol);
-
-            } else {
-                //some times if the active sheet is invisible or chartworksheet ,just use the first worksheet
-                activeSheetName = xs.bottombar.dataNames[0];
-                xs.setActiveSheetByName(activeSheetName).setActiveCell(0, 0);
-            }
+                       // ---------------------------------------------------------
+           // Set the active  cell (fallback to  A1)
+           // ---------------------------------------------------------
+           if (xs.getActiveSheetName() == activeSheetName) {
+				xs.setActiveCell(jsondata.actrow, jsondata.actcol);
+           } else {
+			//some times if the active sheet is invisible or chartworksheet ,just use the first worksheet
+            // If the requested sheet is hidden or a chart sheet,it will set the first visilbe sheet , just set A1 as active sheet
+				xs.setActiveCell(0, 0);
+           }
 
 
         }

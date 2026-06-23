@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.aspose.cells.gridweb.example</groupId>
 	<artifactId>gridwebdemo</artifactId>
-	<version>springboot3.3-SNAPSHOT</version>
+	<version>26.6</version>
 	<name>springboot3.3demo</name>
 	<description>GridWeb Demo project for Spring Boot 3.3</description>
 	<properties>
@@ -39,7 +39,7 @@
 		 <dependency>
 			<groupId>com.aspose</groupId>
 			<artifactId>aspose-cells</artifactId>
-			<version>26.3</version>
+			<version>26.6</version>
 			<classifier>gridweb-jakarta</classifier>
 	    </dependency>   
 	</dependencies>

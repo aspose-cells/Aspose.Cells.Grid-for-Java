@@ -70,9 +70,10 @@ $(function () {
         $('#gridjs-demo-uid').empty();
         const sheets = jsondata.data;
         const filename = jsondata.filename;
+		const activeSheetName = jsondata.actname;
         // Initialise the GridJs UI
         xs = x_spreadsheet('#gridjs-demo-uid', option)
-            .loadData(sheets)
+            .loadData(sheets,activeSheetName)
             .updateCellError((msg) => console.error(msg));
         // Hide sheet tabs if server says not to show them
         if (!jsondata.showtabs) {
@@ -82,16 +83,14 @@ $(function () {
         xs.setUniqueId(uniqueId);
         xs.setFileName(filename);
         // ---------------------------------------------------------
-        // Set the active sheet & cell (fallback to first sheet)
+        // Set the active  cell (fallback to  A1)
         // ---------------------------------------------------------
-        let activeSheetName = jsondata.actname;
-        if (xs.bottombar.dataNames.includes(activeSheetName)) {
-            xs.setActiveSheetByName(activeSheetName)
-                .setActiveCell(jsondata.actrow, jsondata.actcol);
+        if (xs.getActiveSheetName() == activeSheetName) {
+            xs.setActiveCell(jsondata.actrow, jsondata.actcol);
         } else {
-            // If the requested sheet is hidden or a chart sheet, use the first sheet
-            activeSheetName = xs.bottombar.dataNames[0];
-            xs.setActiveSheetByName(activeSheetName).setActiveCell(0, 0);
+			//some times if the active sheet is invisible or chartworksheet ,just use the first worksheet
+            // If the requested sheet is hidden or a chart sheet,it will set the first visilbe sheet , just set A1 as active sheet
+           xs.setActiveCell(0, 0);
         }
         // ---------------------------------------------------------
         // Bind auxiliary URLs (image handling, OLE, file download, etc.)

@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>gridjs-demo-springboot-v3</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>26.6</version>
 	<name>gridjs-demo</name>
 	<description>Demo project for gridjs using Spring Boot v3</description>
 	<url/>
@@ -45,14 +45,14 @@
     <dependency>
         <groupId>com.aspose</groupId>
         <artifactId>aspose-cells</artifactId>
-        <version>26.3</version>
+        <version>26.6</version>
     </dependency>  
     <!-- Aspose.Cells GridJs extension -->
       <dependency>
         <groupId>com.aspose</groupId>
         <artifactId>aspose-cells</artifactId>
         <classifier>gridjs</classifier>
-        <version>26.3</version>
+        <version>26.6</version>
     </dependency> 
     <!-- Gson for JSON handling -->
     <dependency>
@@ -65,7 +65,7 @@
     <repository>
         <id>AsposeJavaAPI</id>
         <name>Aspose Java API</name>
-        <url>https://repository.aspose.com/repo/</url>
+        <url>https://releases.aspose.com/java/repo/</url>
     </repository>
 </repositories> 
 	<build>

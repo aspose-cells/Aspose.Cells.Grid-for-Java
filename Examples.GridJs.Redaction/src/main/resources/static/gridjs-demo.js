@@ -3,6 +3,7 @@
  * GridJs Demo – client side logic.
  * Loads a workbook from the server, displays it, and enables server‑side updates.
  */
+ let xs;   
 $(function () {
     // -------------------------------------------------------------
     // 1. Define URLs used by the demo
@@ -18,7 +19,8 @@ $(function () {
     // -------------------------------------------------------------
     // 2. Global GridJs instance placeholder
     // -------------------------------------------------------------
-    let xs; // will hold the x_spreadsheet instance
+    // will hold the x_spreadsheet instance
+    let uid='';
     // -------------------------------------------------------------
     // 3. Helper to generate a UUID (used as unique session id)
     // -------------------------------------------------------------
@@ -28,40 +30,91 @@ $(function () {
             (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
     }
+    
+	function jumpWithUid() {
+		// 1. 获取当前 URL 的查询参数字符串 (即 ? 后面的部分)
+		const params = new URLSearchParams(window.location.search);
+
+		// 2. 获取 uid 的值
+		uid = params.get('uid');
+		let fname = params.get('filename')??'Sample.xlsx';
+		 
+		$("#filename").val(fname);
+
+		if (uid) {
+			console.log("get uid:", uid);
+			setTimeout(function() {
+				$("#loadBtn").trigger("click");
+			}, 500);
+
+
+		} else {
+			uid = generateUUID();
+
+
+			const currentUrl = window.location.href;
+
+
+
+			const urlObj = new URL(currentUrl);
+			urlObj.searchParams.set('uid', uid);
+
+
+			window.location.href = urlObj.toString();
+		}
+
+
+
+
+	}
+
+	jumpWithUid();
     // -------------------------------------------------------------
     // 4. Load Spreadsheet button click handler
     // -------------------------------------------------------------
     $("#loadBtn").on("click", function () {
+		$("#loadbtndiv").hide();
         const filename = $("#filename").val().trim();
         if (!filename) {
             alert("Please enter a file name.");
             return;
         }
-        const uid = generateUUID(); // unique identifier for this session
+        console.log("get uid in btn click:", uid); 
+        console.log("get file  in btn click:", filename); 
+        // unique identifier for this session
         // Build request URL with query parameters
         const requestUrl = `${queryJsonUrl}?filename=${encodeURIComponent(filename)}&uid=${uid}`;
         // ---------------------------------------------------------
         // 5. AJAX request to obtain the JSON representation of the workbook
         // ---------------------------------------------------------
-        $.ajax({
-            url: requestUrl,
-            method: "GET",
-            dataType: "text", // server returns plain text JSON
-            success: function (responseJsonString) {
-                const jsondata = JSON.parse(responseJsonString);
-                const option = {
-                    updateMode: 'server',
-                    updateUrl: updateUrl,
-                    local: 'en' // UI language
-                };
-                loadWithOption(jsondata, option, uid);
-            },
-            error: function (xhr, status, err) {
-                console.error("Failed to load spreadsheet:", err);
-                alert("Error loading file: " + err);
-            }
-        });
-    });
+		$.ajax({
+			url: requestUrl,
+			method: "GET",
+			dataType: "text", // server returns plain text JSON
+			success: function(responseJsonString) {
+				const jsondata = JSON.parse(responseJsonString);
+				const option = {
+					updateMode: 'server',
+					updateUrl: updateUrl,
+					local: 'en', // UI language
+					mode: 'read',
+					enableRedactionShape: true,
+					redactionDefaultColor: 'green',
+					redactionReasons: [
+						'Personal Info',
+						'Confidential',
+						'Legal Privilege',
+						'Trade Secret',
+					],
+				};
+				loadWithOption(jsondata, option, uid);
+			},
+			error: function(xhr, status, err) {
+				console.error("Failed to load spreadsheet:", err);
+				alert("Error loading file: " + err);
+			}
+		});
+	});
     // -------------------------------------------------------------
     // 6. Function that creates the GridJs UI and binds all URLs
     // -------------------------------------------------------------
@@ -71,7 +124,7 @@ $(function () {
         const sheets = jsondata.data;
         const filename = jsondata.filename;
         const activeSheetName = jsondata.actname;
-        // Initialise the GridJs UI
+        // Initialise the GridJs UI, load data and set active sheet
         xs = x_spreadsheet('#gridjs-demo-uid', option)
             .loadData(sheets,activeSheetName)
             .updateCellError((msg) => console.error(msg));
@@ -99,5 +152,24 @@ $(function () {
         xs.setFileDownloadInfo(fileDownloadUrl);
         xs.setOleDownloadInfo(oleDownloadUrl);
         xs.setOpenFileUrl("/"); // optional: opens home page
+        xs.on('redaction-inserted', (name,s) => {
+
+                console.log('redaction-inserted:', s,' at sheet:',name);
+
+
+
+            }).on('redaction-updated', (name, s) => {
+
+                console.log('redaction-updated:', s, ' at sheet:',name);
+
+
+
+            }).on('redaction-deleted', (name, s) => {
+
+                console.log('redaction-deleted:', s,' at sheet:', name);
+
+
+
+            });
     }
 });
