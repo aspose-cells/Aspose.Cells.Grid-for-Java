@@ -13,9 +13,9 @@ This article walks you through creating a **Spring Boot 3.5.7** web application 
 
 All code snippets are complete, ready to compile, and can be run locally.
 
-{{% alert color="primary" %}}
-**Prerequisite:** You must have a valid Aspose.Cells GridJs license (or use a 30‑day evaluation). Place the license file (`Aspose.Cells.GridJs.lic`) under `src/main/resources` and load it in the Spring Boot application startup (not shown here for brevity).  
-{{% /alert %}}
+> [!TIP]
+> **Prerequisite:** You must have a valid Aspose.Cells GridJs license (or use a 30‑day evaluation). Place the license file (`Aspose.Cells.GridJs.lic`) under `src/main/resources` and load it in the Spring Boot application startup (not shown here for brevity).  
+ 
 
 ---
 
@@ -395,13 +395,12 @@ $(function () {
                     locale: 'en', // UI language
                     mode: 'read',
                     //enable redaction feature
-				 enableRedactionShape: true,
-				 redactionDefaultColor: 'green',
-				 redactionReasons: [
-						'PII - Personal Information',
-						'Confidential Business',
-						'Legal Privilege',
-						'Trade Secret',
+                    enableRedactionShape: true,
+                    redactionDefaultColor: 'green',
+                    redactionReasons: ['PII - Personal Information',
+					'Confidential Business',
+					'Legal Privilege',
+					'Trade Secret',
 					],
                 };
                 loadWithOption(jsondata, option, uid);
@@ -488,9 +487,9 @@ $(function () {
 
 4. The workbook appears inside the `#gridjs-demo-uid` container. Edit cells, add images, or download the updated file – all changes are persisted on the server via the GridJs REST API.
 
-{{% alert color="primary" %}}
-If you encounter a *404* on the JSON load request, verify that the file name is correct and that the `getFullFilePath` method points to the proper directory.
-{{% /alert %}}
+> [!TIP]
+> If you encounter a *404* on the JSON load request, verify that the file name is correct and that the `getFullFilePath` method points to the proper directory.
+
 
 ---
 
@@ -508,10 +507,10 @@ If you encounter a *404* on the JSON load request, verify that the file name is 
 ---
 
 ## 7. Additional Resources
-
+- **GridJs Redaction Feature** – <https://docs.aspose.com/cells/java/aspose-cells-gridjs/how-to-use-redaction/>
 - **Aspose.Cells GridJs Java API Reference** – <https://reference.aspose.com/cells/java/com.aspose.gridjs>
 - **GridJs‑spreadsheet NPM package** – <https://www.npmjs.com/package/gridjs-spreadsheet>
-- **Demo Source** – <https://github.com/aspose-cells/Aspose.Cells.Grid-for-Java/tree/main/Examples.GridJs.Simple>
-- **Spring Boot Official Documentation** – <https://spring.io/projects/spring-boot>
+- **Demo Source** – <https://github.com/aspose-cells/Aspose.Cells.Grid-for-Java/tree/main/Examples.GridJs.Redaction>
+
 
 ---
