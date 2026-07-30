@@ -1,0 +1,13 @@
+.git
+.gitignore
+.idea
+.vscode
+node_modules
+**/node_modules
+**/.angular
+**/dist
+target
+src/main/resources/static/demos
+grid_cache
+upload
+*.log

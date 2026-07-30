@@ -1,0 +1,11 @@
+node_modules/
+.m2/
+**/node_modules/
+**/.angular/
+**/dist/
+src/main/resources/static/demos/
+target/
+grid_cache/
+upload/
+*.log
+!package-lock.json

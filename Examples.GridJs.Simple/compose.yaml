@@ -1,0 +1,17 @@
+services:
+  gridjs-java-simple:
+    image: aspose-cells-gridjs-java-simple:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${GRIDJS_JAVA_PORT:-8080}:8080"
+    environment:
+      GRIDJS_WORKBOOK_DIR: /app/files
+      GRIDJS_CACHE_DIR: /app/grid_cache
+    volumes:
+      - gridjs-java-simple-cache:/app/grid_cache
+    restart: unless-stopped
+
+volumes:
+  gridjs-java-simple-cache:

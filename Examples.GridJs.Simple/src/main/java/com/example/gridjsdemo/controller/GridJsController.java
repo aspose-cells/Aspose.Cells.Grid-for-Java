@@ -3,21 +3,29 @@ package com.example.gridjsdemo.controller;
 import com.aspose.gridjs.GridJsControllerBase;
 import com.aspose.gridjs.GridJsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 /**
  * REST controller that handles GridJs operations such as loading a workbook,
  * updating cells, managing images, and downloading files.
  */
 @RestController
-@RequestMapping("/GridJs")
+@RequestMapping({"/GridJs", "/GridJs2"})
 public class GridJsController extends GridJsControllerBase {
+    private final Path workbookDirectory;
+
     @Autowired
-    public GridJsController(GridJsService gridJsService) {
+    public GridJsController(
+            GridJsService gridJsService,
+            @Value("${gridjs.workbook-directory}") String workbookDirectory) {
         super(gridJsService);
+        this.workbookDirectory = Paths.get(workbookDirectory).toAbsolutePath().normalize();
     }
     /**
      * Loads a workbook and returns its JSON representation together with a unique id.
@@ -39,8 +47,11 @@ public class GridJsController extends GridJsControllerBase {
      * Resolve the physical file path. Adjust the base folder to match your environment.
      */
     private String getFullFilePath(String filename) {
-        // Example: All Excel files are placed under src/main/resources/files/
-        return "./src/main/resources/files/" + filename;
+        Path safeName = Paths.get(filename).getFileName();
+        if (safeName == null || !safeName.toString().equals(filename)) {
+            throw new IllegalArgumentException("Invalid workbook filename");
+        }
+        return workbookDirectory.resolve(safeName).toString();
     }
     // -------------------------------------------------------------------------
     // The following endpoints simply delegate to the base implementation.
